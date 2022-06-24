@@ -1,23 +1,49 @@
 // Generate rock/paper/scissors for computer to play
 
 function computerPlay() {
-    let computerSelection;
     let randomNum = Math.floor(Math.random() * 3) + 1;
-    if (randomNum == 1) {
-        computerSelection = "rock";
-    } else if (randomNum == 2) {
-        computerSelection = "paper";
-    } else if (randomNum != "" && randomNum != null) item = "scissors";
-    return computerSelection;
+    switch (randomNum) {
+        case 1:
+            return "rock";
+            break;
+        case 2:
+            return "paper";
+            break;
+        case 3:
+            return "scissors";
+            break;
+        default:
+            computerPlay();
+    }
 }
 
 // Ask for player rock/paper/scissors choice
 
 function playerPlay() {
-    let playerSelection = prompt("Choose your weapon: rock, paper or scissors!").toLowerCase();
-    if (playerSelection != "rock"
-        && playerSelection != "paper"
-        && playerSelection != "scissors") {
-        playerPlay();
-    } else return playerSelection;
+    let playerInput = prompt("Rock, paper or scissors?").toLowerCase();
+    if (playerInput === "rock" || playerInput === "paper" || playerInput === "scissors") {
+        return playerInput;
+    } else alert("Wrong input. Refresh this page to begin anew.");
+}
+
+// Play round of the game
+
+function playRound(playerSelection = playerPlay(), computerSelection = computerPlay()) {
+    let roundWinner;
+    alert(playerSelection + " VS " + computerSelection);
+    if (playerSelection === computerSelection) {
+        roundWinner = 0; // No one wins. Tie.
+    } else if ((playerSelection === "rock" && computerSelection != "paper") 
+    || (playerSelection === "scissors" && computerSelection != "rock")
+    || (playerSelection === "paper" && computerSelection != "rock")) {
+        roundWinner = 1; //Player wins
+    } else {
+        roundWinner = 2; // Computer wins
+    }
+    if (roundWinner == 1) {
+        alert("You won, " + playerSelection + " beats " + computerSelection);
+    } else if (roundWinner == 2) {
+        alert("Computer won, " + computerSelection + " beats " + playerSelection);
+    } else alert("It's a tie!");
+    return roundWinner;
 }
