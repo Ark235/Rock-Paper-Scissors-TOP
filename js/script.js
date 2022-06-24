@@ -32,13 +32,13 @@ function playRound(playerSelection = playerPlay(), computerSelection = computerP
     let roundWinner;
     alert(playerSelection + " VS " + computerSelection);
     if (playerSelection === computerSelection) {
-        roundWinner = 0; // No one wins. Tie.
+        roundWinner = 0;                                                    // No one wins. Tie. 0
     } else if ((playerSelection === "rock" && computerSelection != "paper") 
     || (playerSelection === "scissors" && computerSelection != "rock")
-    || (playerSelection === "paper" && computerSelection != "rock")) {
-        roundWinner = 1; //Player wins
+    || (playerSelection === "paper" && computerSelection != "scissors")) {
+        roundWinner = 1;                                                    // Player wins. 1
     } else {
-        roundWinner = 2; // Computer wins
+        roundWinner = 2;                                                    // Computer wins. 2
     }
     if (roundWinner == 1) {
         alert("You won, " + playerSelection + " beats " + computerSelection);
