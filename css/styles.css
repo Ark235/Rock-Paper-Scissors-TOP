@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px;
+}
+
+.weapon {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.weapon-heading {
+    text-align: center;
+    padding: 30px;
+}
+
+.weapon-item {
+    padding: 30px;
+    font-size: 20px;
+}

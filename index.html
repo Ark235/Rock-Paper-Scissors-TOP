@@ -4,11 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RPS - REV. 1</title>
     <link rel="stylesheet" href="./css/styles.css">
-    <script src="./js/script.js"></script>
+    <script src="./js/script.js" defer></script>
 </head>
 <body>
-    
+    <div class="wrapper">
+        <h1 class="heading">Rock Paper Scissors Rev. 1</h1>
+        <div class="weapon">
+            <h3 class="weapon-heading">Choose your weapon!</h3>
+            <button class="weapon-item rock">
+                Mighty Rock
+            </button>
+            <button class="weapon-item paper">
+                Cunning Paper
+            </button>
+            <button class="weapon-item scissors">
+                Crafty Scissors
+            </button>
+        </div>
+        <div class="score">
+            <div class="score-player">
+                <p class="score-player score-sum"></p>
+            </div>
+            <div class="score-computer">
+                <p class="score-computer score-sum"></p>
+            </div>
+        </div>
+        <div class="combat-log"></div>
+    </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
-game();
+
+
 
 // Generate rock/paper/scissors for computer to play
 
