@@ -8,38 +8,49 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;
-    gap: 10px;
+    padding: 20px;
+    gap: 20px;
 }
 
 .weapon {
     display: flex;
-    flex-direction: column;
     gap: 10px;
 }
 
 .weapon-heading {
+    display: inline-block;
     text-align: center;
     padding: 10px;
 }
 
 .weapon-item {
+    width: 33.3%;
     padding: 20px;
-    font-size: 20px;
+    font-size: 17px;
+    flex: 1 auto;
+    font-weight: 700;
 }
 
 .combat-log {
-    height: 150px;
-    width: 400px;
+    height: 270px;
+    width: 500px;
     border: 1px solid red;
     overflow: auto;
+    text-align: center;
 }
 
 .score {
-    width: 200px;
-    height: 50px;
+    width: 500px;
+    height: 120px;
     border: 1px solid blue;
     overflow: auto;
+    text-align: center;
+}
+
+.score-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 h4 {

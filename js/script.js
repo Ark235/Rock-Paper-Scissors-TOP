@@ -1,59 +1,90 @@
-const btnRock = document.querySelector('.rock');
-const btnPaper = document.querySelector('.paper');
-const btnScissors = document.querySelector('.scissors');
+//** Select rack/paper/scissors buttons in html */
 
-btnRock.addEventListener('click', () => newCombatEntry(btnRock.classList[1]));
-btnPaper.addEventListener('click', () => newCombatEntry(btnPaper.classList[1]));
-btnScissors.addEventListener('click', () => newCombatEntry(btnScissors.classList[1]));
+const rockBtn = document.querySelector('.rock');
+const paperBtn = document.querySelector('.paper');
+const scissorsBtn = document.querySelector('.scissors');
 
-/** Generate computer's turn data */
+rockBtn.addEventListener('click', () => {
+    playRound('rock', computerPlay());
+});
 
-function computerChoice() {
-    let randomNum = Math.floor(Math.random() * 3) + 1;
-    switch (randomNum) {
+paperBtn.addEventListener('click', () => {
+    playRound('paper', computerPlay());
+});
+
+scissorsBtn.addEventListener('click', () => {
+    playRound('scissors', computerPlay());
+});
+
+//** Get computer choice (rock/paper/scissors) */
+
+function computerPlay() {
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    switch (randomNumber) {
         case 1:
             return 'rock';
-            break;
         case 2:
             return 'paper';
-            break;
         case 3:
             return 'scissors';
-            break;
         default:
-            computerChoice();
+            computerPlay();
     }
 }
 
-/** Check who win 1 round */
+//** Play one round of the game */
 
-function checkWinner(playerChoice, computerChoice) {
-    let winner;
-    if (playerChoice === computerChoice) {
-        winner = 0;
-    } else if ((playerChoice == 'rock' && computerChoice != 'paper')
-        || (playerChoice == 'paper' && computerChoice != 'scissors')
-        || (playerChoice == 'scissors' && computerChoice != 'rock')) {
-        winner = 1;
-    } else winner = 2;
-    return winner;
+function playRound(playerSelection, computerSelection) {
+    let roundWinner;
+    if (playerSelection === computerSelection) {
+        roundWinner = 0;                                             // tie
+    } else if ((playerSelection == 'rock' && computerSelection != 'paper')
+        || (playerSelection == 'paper' && computerSelection != 'scissors')
+        || (playerSelection == 'scissors' && computerSelection != 'rock')) {
+        roundWinner = 1;                                             // player win
+    } else roundWinner = 2;                                          // computer win
+    logEntry(playerSelection, computerSelection, roundWinner);       // add entry to the log
+    scoreCheck(roundWinner);
+    return roundWinner;
 }
 
-/** Add new entry to the combat log */
+//** Add new entry to the log */
 
-function newCombatEntry(playerChoice) {
-    const combatLog = document.querySelector('.combat-log');
-    const newLogEntry = document.createElement('p');
-    switch (checkWinner(playerChoice, computerChoice())) {
-        case 1:
-            newLogEntry.textContent = `You win this round!`;
-            break;
-        case 2:
-            newLogEntry.textContent = `Computer wins this round!`;
-            break;
-        case 0:
-            newLogEntry.textContent = `No one wins, it\'s a tie`;
-            break;
+function logEntry(playerSelection, computerSelection, roundWinner) {
+    const container = document.querySelector('.combat-log');
+    const choiceEntry = document.createElement('p');
+    const winnerEntry = document.createElement('p');
+    winnerEntry.setAttribute('style', 'border-bottom: 1px dashed red; padding-bottom: 5px; margin-bottom: 5px;')
+    choiceEntry.textContent = `You chose ${playerSelection}, computer chose ${computerSelection}`;
+    container.appendChild(choiceEntry);
+    winnerEntry.textContent = `${roundWinner == 0 ? "It's a tie!" : (roundWinner == 1 ? "You win this round!" : "Computer wins this round!")}`;
+    container.appendChild(winnerEntry);
+}
+
+//** Display round score entry */
+
+function scoreCheck(roundWinner) {
+    const displayPlayerScore = document.querySelector('.score-player');
+    const displayComputerScore = document.querySelector('.score-computer');
+
+    const newPlayerScore = document.createElement('p');
+    const newComputerScore = document.createElement('p');
+
+    let playerScore = 0;
+    let computerScore = 0;
+    if (roundWinner === 1) {
+        playerScore++;
+    } else if (roundWinner === 2) {
+        computerScore++;
     }
-    combatLog.appendChild(newLogEntry);
+    newPlayerScore.textContent = `player ${playerScore}`;
+    newComputerScore.textContent = `${computerScore} computer`;
+    displayPlayerScore.appendChild(newPlayerScore);
+    displayComputerScore.appendChild(newComputerScore);
+}
+
+//** Play game until one player gets 5 points */
+
+function playGame(playRound) {
+    
 }
