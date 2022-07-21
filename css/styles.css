@@ -1,58 +1,76 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .wrapper {
+    max-width: 1024px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    gap: 20px;
+    gap: 45px;
 }
 
-.weapon {
+.heading {
+    padding: 70px 0 0 0;
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 45px;
 }
 
-.weapon-heading {
-    display: inline-block;
-    text-align: center;
-    padding: 10px;
+.buttons {
+    width: 837px;
+    height: 75px;
+    display: flex;
+    gap: 36px;
 }
 
-.weapon-item {
-    width: 33.3%;
-    padding: 20px;
-    font-size: 17px;
-    flex: 1 auto;
-    font-weight: 700;
-}
-
-.combat-log {
-    height: 270px;
-    width: 500px;
-    border: 1px solid red;
-    overflow: auto;
-    text-align: center;
+.buttons button {
+    flex: 1 0 1px;
 }
 
 .score {
-    width: 500px;
-    height: 120px;
-    border: 1px solid blue;
-    overflow: auto;
-    text-align: center;
+    width: 837px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: lightgray;
+    padding: 36px 0;
+    gap: 36px;
 }
 
-.score-content {
+.score-blocks {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    padding: 0 165px;
+    gap: 138px;
 }
 
-h4 {
+.score-player, 
+.score-computer {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+.log {
+    width: 837px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+}
+
+.new-game {
+    /* display: none; */
+}
+
+.new-game .new-game-start {
+    width: 381px;
+    height: 75px;
 }
