@@ -1,41 +1,77 @@
-//** Select rack/paper/scissors buttons in html */
+let playerSelection = 0;
+let computerSelection = 0;
+
+let roundWinner = 0;
+let gameWinner = 0;
+
+let playerScore = 0;
+let computerScore = 0;
 
 const rockBtn = document.querySelector('.rock');
 const paperBtn = document.querySelector('.paper');
 const scissorsBtn = document.querySelector('.scissors');
+const newGameBtn = document.querySelector('.new-game');
 
 rockBtn.addEventListener('click', () => {
-    playRound('rock', computerPlay());
+    playerSelection = 'rock';                       //** Get player selection */
+    playRound();
 });
-
 paperBtn.addEventListener('click', () => {
-    playRound('paper', computerPlay());
+    playerSelection = 'paper';                      //** Get player selection */
+    playRound();
 });
-
 scissorsBtn.addEventListener('click', () => {
-    playRound('scissors', computerPlay());
+    playerSelection = 'scissors';                   //** Get player selection */
+    playRound();
+});
+newGameBtn.addEventListener('click', () => {
+    let logEntry = document.querySelector('.log-text');
+    logEntry.textContent = 'Choose your weapon to start the game!';
+
+    let uiPlayerScore = document.querySelector('.score-player-value');
+    uiPlayerScore.textContent = '0';
+
+    let uiComputerScore = document.querySelector('.score-computer-value');
+    uiComputerScore.textContent = '0';
+
+    rockBtn.removeAttribute('disabled');
+    paperBtn.removeAttribute('disabled');
+    scissorsBtn.removeAttribute('disabled');
+
+    newGameBtn.style.display = 'none';
+
+    playerSelection = 0;
+    computerSelection = 0;
+
+    roundWinner = 0;
+    gameWinner = 0;
+
+    playerScore = 0;
+    computerScore = 0;
 });
 
 //** Get computer choice (rock/paper/scissors) */
 
-function computerPlay() {
+function getComputerSelection() {
     let randomNumber = Math.floor(Math.random() * 3) + 1;
     switch (randomNumber) {
         case 1:
-            return 'rock';
+            computerSelection = 'rock';
+            return computerSelection;
         case 2:
-            return 'paper';
+            computerSelection = 'paper';
+            return computerSelection;;
         case 3:
-            return 'scissors';
+            computerSelection = 'scissors';
+            return computerSelection;;
         default:
             computerPlay();
     }
 }
 
-//** Play one round of the game */
+//** Check round winner */
 
-function playRound(playerSelection, computerSelection) {
-    let roundWinner;
+function checkRoundWinner() {
     if (playerSelection === computerSelection) {
         roundWinner = 0;                                             // tie
     } else if ((playerSelection == 'rock' && computerSelection != 'paper')
@@ -43,53 +79,62 @@ function playRound(playerSelection, computerSelection) {
         || (playerSelection == 'scissors' && computerSelection != 'rock')) {
         roundWinner = 1;                                             // player win
     } else roundWinner = 2;                                          // computer win
-    logEntry(playerSelection, computerSelection, roundWinner);       // add entry to the log
-    scoreCheck(roundWinner);
-    return roundWinner;
 }
 
-//** Add new entry to the log */
+//** Check game winner */
 
-function logEntry(playerSelection, computerSelection, roundWinner) {
-    const container = document.querySelector('.combat-log');
-    const choiceEntry = document.createElement('p');
-    const winnerEntry = document.createElement('p');
-    winnerEntry.setAttribute('style', 'border-bottom: 1px dashed red; padding-bottom: 5px; margin-bottom: 5px;')
-    choiceEntry.textContent = `You chose ${playerSelection}, computer chose ${computerSelection}`;
-    container.appendChild(choiceEntry);
-    winnerEntry.textContent = `${roundWinner == 0 ? "It's a tie!" : (roundWinner == 1 ? "You win this round!" : "Computer wins this round!")}`;
-    container.appendChild(winnerEntry);
+function checkGameWinner() {
+    if (playerScore > computerScore && playerScore == 5) {
+        gameWinner = 'You';
+    } else if (computerScore > playerScore && computerScore == 5) {
+        gameWinner = 'Computer';
+    }
 }
 
-//** Display round score entry */
+//** Update event log text */
 
-function scoreCheck(roundWinner) {
-    const displayPlayerScore = document.querySelector('.score-player');
-    const displayComputerScore = document.querySelector('.score-computer');
+function logUpdate(gameOver) {
+    let logEntry = document.querySelector('.log-text');
+    if (gameOver === false) {
+        logEntry.textContent = `${playerSelection} VS ${computerSelection}! 
+    ${(roundWinner === 0 ? 'It\'s a tie!' : (roundWinner === 1 ? 'You win this round!' : 'Computer win this round!'))}`;
+    } else {
+        logEntry.textContent = `Game is over! ${gameWinner} won!`
+    }
+}
 
-    const newPlayerScore = document.createElement('p');
-    const newComputerScore = document.createElement('p');
+//** Add to score and Update score in UI */
 
-    let playerScore = 0;
-    let computerScore = 0;
-    let winnerScore = 0;
-
+function addScore() {
+    let uiPlayerScore = document.querySelector('.score-player-value');
+    let uiComputerScore = document.querySelector('.score-computer-value');
     if (roundWinner === 1) {
         playerScore++;
+        uiPlayerScore.textContent = `${playerScore}`;
     } else if (roundWinner === 2) {
         computerScore++;
+        uiComputerScore.textContent = `${computerScore}`;
     }
-    newPlayerScore.textContent = `player ${playerScore}`;
-    newComputerScore.textContent = `${computerScore} computer`;
-    displayPlayerScore.appendChild(newPlayerScore);
-    displayComputerScore.appendChild(newComputerScore);
-
-    console.log(winnerScore);
-    return;
 }
 
-//** Play game until one player gets 5 points */
+//** Game over */
 
-function playGame(score) {
-    
+function gameOver() {
+    if (playerScore === 5 || computerScore === 5) {
+        rockBtn.setAttribute('disabled', 'disabled');
+        paperBtn.setAttribute('disabled', 'disabled');
+        scissorsBtn.setAttribute('disabled', 'disabled');
+        newGameBtn.style.display = 'flex';
+        return true;
+    } else return false;
+}
+
+//** Play round of the game */
+
+function playRound() {
+    getComputerSelection();
+    checkRoundWinner();
+    addScore();
+    checkGameWinner();
+    logUpdate(gameOver());
 }

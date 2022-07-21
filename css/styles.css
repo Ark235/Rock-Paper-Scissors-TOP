@@ -100,7 +100,7 @@
 }
 
 .new-game {
-    /* display: none; */
+    display: none;
     width: 40%;
     text-align: center;
 }
