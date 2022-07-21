@@ -72,6 +72,8 @@ function scoreCheck(roundWinner) {
 
     let playerScore = 0;
     let computerScore = 0;
+    let winnerScore = 0;
+
     if (roundWinner === 1) {
         playerScore++;
     } else if (roundWinner === 2) {
@@ -81,10 +83,13 @@ function scoreCheck(roundWinner) {
     newComputerScore.textContent = `${computerScore} computer`;
     displayPlayerScore.appendChild(newPlayerScore);
     displayComputerScore.appendChild(newComputerScore);
+
+    console.log(winnerScore);
+    return;
 }
 
 //** Play game until one player gets 5 points */
 
-function playGame(playRound) {
+function playGame(score) {
     
 }

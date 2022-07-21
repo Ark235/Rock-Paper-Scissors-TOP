@@ -12,28 +12,35 @@
 
 <body>
     <div class="wrapper">
-        <h1 class="heading">Rock Paper Scissors Rev. 1</h1>
-        <h3 class="weapon-heading">Choose your weapon!</h3>
-        <div class="weapon">
-            <button class="weapon-item rock">
-                Mighty Rock
-            </button>
-            <button class="weapon-item paper">
-                Cunning Paper
-            </button>
-            <button class="weapon-item scissors">
-                Crafty Scissors
-            </button>
+        <div class="heading">
+            <h1>Rock, Paper, Scissors</h1>
+            <h3>Choose your weapon</h3>
         </div>
+
+        <div class="buttons">
+            <button class="rock">ROCK</button>
+            <button class="paper">PAPER</button>
+            <button class="scissors">SCISSORS</button>
+        </div>
+
         <div class="score">
-            <h4>Score</h4>
-            <div class="score-content">
-                <div class="score-player"></div>
-                <div class="score-computer"></div>
+            <h3 class="score-heading">SCORE</h3>
+            <div class="score-player">
+                <p>YOU</p>
+                <p class="score-player-value">0</p>
+            </div>
+            <div class="score-computer">
+                <p>COMPUTER</p>
+                <p class="score-computer-value">0</p>
             </div>
         </div>
-        <div class="combat-log">
-            <h4>Log</h4>
+
+        <div class="log">
+            <p class="log-text">Choose your weapon to start the game!</p>
+        </div>
+
+        <div class="new-game">
+            <button class="new-game-start">Start new game</button>
         </div>
     </div>
 </body>
